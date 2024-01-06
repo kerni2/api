@@ -2,7 +2,7 @@ require 'grape-swagger'
 
 # Root API class
 class RootAPI < Grape::API
-  format format_string :json
+  format :json
   prefix :api
 
   helpers do
