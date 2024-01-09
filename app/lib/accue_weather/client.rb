@@ -14,7 +14,7 @@ module AccueWeather
 
     def uniq_id(city:)
       api_request(
-        url_with_path('locations/v1/cities/search'),
+        url_with_path('/locations/v1/cities/search'),
         ::AccueWeather::APIRequestFactory
           .new
           .uniq_id(city)
@@ -27,7 +27,7 @@ module AccueWeather
     def api_request(url, params = {})
       response = http_get(url, params)
 
-      ::AccueWeather::APIRespose.new(response)
+      ::AccueWeather::APIResponse.new(response)
     end
 
     def http_get(url, params)
@@ -66,7 +66,7 @@ module AccueWeather
       raise Client::Error, message
     end
 
-    def handle_response
+    def handle_response(response)
       return { body: response.parsed_response, headers: response.headers } if response.code < 400
 
       raise_error "AccueWeather response status code: #{response.code}, Message: #{response.body}"
@@ -74,7 +74,7 @@ module AccueWeather
 
     def url_with_path(new_path)
       new_uri = accue_weather_uri.dup
-      new_uri.path += [new_path].join('/').squeeze( *other_strings '/')
+      new_uri.path += [new_path].join('/').squeeze('/')
       new_uri.to_s
     end
 
