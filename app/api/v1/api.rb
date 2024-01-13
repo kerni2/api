@@ -4,5 +4,6 @@ module V1
     version 'v1', using: :path
 
     mount Weather
+    mount Backend
   end
 end
