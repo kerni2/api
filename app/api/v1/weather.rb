@@ -3,6 +3,7 @@ module V1
   # Weather API
   class Weather < Grape::API
     CITY = 'miami'
+    @@ci = CITY
 
     before do
       def client
