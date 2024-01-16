@@ -39,7 +39,7 @@ module V1
         end
 
         desc 'minimum temperature in 24 hours'
-        get '/max' do
+        get '/min' do
           result = client.historical_temperature(uniq_id: uniq_id)
   
           present result.min_temp_in_24_hours
